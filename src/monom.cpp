@@ -1,8 +1,4 @@
-#include"monom.h"
-
-
-
-
+#include "../include/monom.h"
 
 
 

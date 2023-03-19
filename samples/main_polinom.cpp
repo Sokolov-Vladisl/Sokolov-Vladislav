@@ -1,4 +1,5 @@
-#include"Functions.h"
+#include "../include/Functions.h"
+
 
 
 int main()
@@ -12,7 +13,7 @@ int main()
 		cout << "Введите количество мономов в полиноме:  ";
 		int n = amount_of_monoms();
 
-		polinom A= create_polinom(n);
+		polinom A = create_polinom(n);
 
 
 		cout << endl << endl << endl << endl;
@@ -149,7 +150,7 @@ int main()
 			{
 				calculate(A);
 			}
-			
+
 		}
 
 
@@ -159,10 +160,10 @@ int main()
 	}
 	catch (const exception error)
 	{
-		cout << endl << endl <<"  <!> ОШИБКА <!>"<< endl <<" > "<< error.what() << endl;
+		cout << endl << endl << "  <!> ОШИБКА <!>" << endl << " > " << error.what() << endl;
 	}
 
-	
+
 
 
 

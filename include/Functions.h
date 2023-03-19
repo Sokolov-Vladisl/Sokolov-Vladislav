@@ -1,7 +1,5 @@
-#pragma once
 
-#include "polinom.h"
-
+#include "../include/polinom.h"
 
 
 
@@ -28,7 +26,7 @@ int amount_of_monoms()
 			}
 
 		}
-		
+
 	}
 	return nm;
 }
@@ -42,7 +40,7 @@ int cr_degree()
 	return tmp;
 }
 
-void show_monom(double tmp_dbl,int tmp_xyz)
+void show_monom(double tmp_dbl, int tmp_xyz)
 {
 	if (tmp_dbl == 0) cout << "0";
 	else
@@ -66,7 +64,7 @@ void show_monom(double tmp_dbl,int tmp_xyz)
 
 		else if (!((tmp_xyz - tmp_xyz % 10000) / 10000) && ((tmp_xyz % 10000 - tmp_xyz % 100) / 100) && (tmp_xyz % 100))//  y  z
 		{
-			cout << tmp_dbl  << "y^" << (tmp_xyz % 10000 - tmp_xyz % 100) / 100 << "z^" << tmp_xyz % 100;
+			cout << tmp_dbl << "y^" << (tmp_xyz % 10000 - tmp_xyz % 100) / 100 << "z^" << tmp_xyz % 100;
 		}
 
 		else if (((tmp_xyz - tmp_xyz % 10000) / 10000) && !((tmp_xyz % 10000 - tmp_xyz % 100) / 100) && !(tmp_xyz % 100))//  x
@@ -94,29 +92,29 @@ polinom create_polinom(int Nmon)
 	system("cls");
 
 	polinom P;
-	double p_dbl=0.0;
+	double p_dbl = 0.0;
 	int xyz = -1;
 
 	int tmp_degree = 0;
 
 	for (int i = 0; i < Nmon; i++)
 	{
-		cout << endl <<"Создаём "<< i + 1 << "-й моном из " << Nmon <<"  ("<< i + 1<<"/"<< Nmon <<")"<< endl ;
+		cout << endl << "Создаём " << i + 1 << "-й моном из " << Nmon << "  (" << i + 1 << "/" << Nmon << ")" << endl;
 
 		cout << "\n Введите коэффициент :  ";
 		cin >> p_dbl;
 
 		cout << "\n Введите степени переменных в мономе (от 0 до 99) :";
 		cout << "\nx^";
-		xyz = cr_degree() *10000;
+		xyz = cr_degree() * 10000;
 
 		cout << "\ny^";
-		xyz += cr_degree() *100;
+		xyz += cr_degree() * 100;
 
 		cout << "\nz^";
 		xyz += cr_degree();
 
-		cout << endl <<i+1<< "-й моном:   " ;
+		cout << endl << i + 1 << "-й моном:   ";
 		show_monom(p_dbl, xyz);
 		cout << endl << endl;
 
@@ -155,7 +153,7 @@ void calculate(polinom P)
 
 	for (auto it = P.head; it != nullptr; it = it->next)
 	{
-		resultat += it->data * pow(dbl1, ((it->xyz) - (it->xyz) % 10000)/10000) * pow(dbl2, ((it->xyz) % 10000 - (it->xyz) % 100) / 100)*pow(dbl3, (it->xyz) % 100);
+		resultat += it->data * pow(dbl1, ((it->xyz) - (it->xyz) % 10000) / 10000) * pow(dbl2, ((it->xyz) % 10000 - (it->xyz) % 100) / 100) * pow(dbl3, (it->xyz) % 100);
 	}
 
 
@@ -163,6 +161,4 @@ void calculate(polinom P)
 
 	system("pause");
 }
-
-
 

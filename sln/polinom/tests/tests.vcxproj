@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{834D0F66-BBB0-480C-902B-12F968C76019}</ProjectGuid>
-    <RootNamespace>My2</RootNamespace>
+    <ProjectGuid>{52624E27-2902-46CD-9896-E8E27E9A23D7}</ProjectGuid>
+    <RootNamespace>tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,14 +124,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="monom.h" />
-    <ClInclude Include="polinom.h" />
+    <ClCompile Include="..\..\..\test\test_main.cpp" />
+    <ClCompile Include="..\..\..\test\test_polinom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="monom.cpp" />
-    <ClCompile Include="polinom.cpp" />
+    <ProjectReference Include="..\gtest\gtest.vcxproj">
+      <Project>{6f04f072-2b81-4d06-8c8c-c7d29ec4c046}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\polinom\polinom.vcxproj">
+      <Project>{e7ef109f-b389-4a10-824a-076948c68e67}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
