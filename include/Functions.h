@@ -32,11 +32,11 @@ int amount_of_monoms()
 }
 
 
-int cr_degree()
+int cr_degree(int p_dbl)
 {
 	int tmp;
 	cin >> tmp;
-	if (tmp < 0 || tmp>99) throw exception("Нарушение правил: Степень вне диапазона  0 - 99");
+	if (p_dbl!=0 && (tmp < 0 || tmp>99)) throw exception("Нарушение правил: Степень вне диапазона  0 - 99");
 	return tmp;
 }
 
@@ -106,13 +106,13 @@ polinom create_polinom(int Nmon)
 
 		cout << "\n Введите степени переменных в мономе (от 0 до 99) :";
 		cout << "\nx^";
-		xyz = cr_degree() * 10000;
+		xyz = cr_degree(p_dbl) * 10000;
 
 		cout << "\ny^";
-		xyz += cr_degree() * 100;
+		xyz += cr_degree(p_dbl) * 100;
 
 		cout << "\nz^";
-		xyz += cr_degree();
+		xyz += cr_degree(p_dbl);
 
 		cout << endl << i + 1 << "-й моном:   ";
 		show_monom(p_dbl, xyz);
@@ -128,11 +128,17 @@ void show_polinom(polinom P)
 {
 	system("cls");
 	cout << "Полином :    ";
-	for (monom* it = P.head; it != nullptr; it = it->next)
+	for (monom* m_it = P.head; m_it != nullptr; m_it = m_it->next)
 	{
-		show_monom(it->data, it->xyz);
-		if (it->next != nullptr) cout << " + ";
+		show_monom(m_it->data, m_it->xyz);
+		if (m_it->next != nullptr) cout << " + ";
 	}
+
+	if (P.head == nullptr)
+	{
+		cout << " 0 ";
+	}
+
 	cout << endl << endl;
 }
 
@@ -151,9 +157,9 @@ void calculate(polinom P)
 	cout << " z: "; cin >> dbl3; cout << endl;
 
 
-	for (auto it = P.head; it != nullptr; it = it->next)
+	for (auto m_it = P.head; m_it != nullptr; m_it = m_it->next)
 	{
-		resultat += it->data * pow(dbl1, ((it->xyz) - (it->xyz) % 10000) / 10000) * pow(dbl2, ((it->xyz) % 10000 - (it->xyz) % 100) / 100) * pow(dbl3, (it->xyz) % 100);
+		resultat += m_it->data * pow(dbl1, ((m_it->xyz) - (m_it->xyz) % 10000) / 10000) * pow(dbl2, ((m_it->xyz) % 10000 - (m_it->xyz) % 100) / 100) * pow(dbl3, (m_it->xyz) % 100);
 	}
 
 

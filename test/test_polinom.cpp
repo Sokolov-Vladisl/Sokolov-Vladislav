@@ -104,3 +104,151 @@ TEST(POLINOM, operator_to_but_its_number)
 	EXPECT_EQ(A.head->xyz, 1);
 }
 
+TEST(POLINOM, clear)
+{
+	polinom A;
+
+	A.push(1, 13);
+	EXPECT_EQ(A.head->data, 1);
+	EXPECT_EQ(A.head->xyz, 13);
+
+	A.clear();
+	EXPECT_EQ(A.head, nullptr);
+
+	A.push(1, 13);
+	EXPECT_EQ(A.head->data, 1);
+	EXPECT_EQ(A.head->xyz, 13);
+}
+
+TEST(POLINOM, degree)
+{
+	polinom A;
+	polinom B;
+
+	A.push(0, 85);
+	B.push(3, 15);
+
+	EXPECT_NO_THROW(A = A * B;);
+}
+
+TEST(POLINOM, problem_degree)
+{
+	polinom A;
+	polinom B;
+
+	EXPECT_NO_THROW(A.push(0, -185););
+	EXPECT_NO_THROW(B.push(0, 11231235););
+}
+
+TEST(POLINOM, minus_and_plus)
+{
+	polinom A;
+	polinom B;
+
+	A.push(3, 15);
+	B.push(5, 15);
+
+	A = A + B;
+	EXPECT_EQ(A.head->data, 8);
+	EXPECT_EQ(A.head->xyz, 15);
+
+
+
+	A.clear();
+	B.clear();
+
+	A.push(-3, 15);
+	B.push(-5, 15);
+
+	A = A + B;
+	EXPECT_EQ(A.head->data, -8);
+	EXPECT_EQ(A.head->xyz, 15);
+
+
+
+	A.clear();
+	B.clear();
+
+	A.push(3, 15);
+	B.push(5, 15);
+
+	A = A - B;
+	EXPECT_EQ(A.head->data, -2);
+	EXPECT_EQ(A.head->xyz, 15);
+
+
+
+	A.clear();
+	B.clear();
+
+	A.push(-3, 15);
+	B.push(-5, 15);
+
+	A = A - B;
+	EXPECT_EQ(A.head->data, 2);
+	EXPECT_EQ(A.head->xyz, 15);
+}
+
+
+TEST(POLINOM, check)
+{
+	polinom A;
+	polinom B;
+
+	A.push(3, 15);
+	B.push(-5, 15);
+
+	A = A + B;
+	EXPECT_EQ(A.head->data, -2);
+	EXPECT_EQ(A.head->xyz, 15);
+
+
+	A.clear();
+	B.clear();
+
+	A.push(3, 15);
+	B.push(5, 15);
+	A.push(3, 25);
+	B.push(5, 10);
+
+	A = A + B;
+
+	EXPECT_EQ(A.head->data, 5);
+	EXPECT_EQ(A.head->xyz, 10);
+
+	EXPECT_EQ(A.head->next->data, 8);
+	EXPECT_EQ(A.head->next->xyz, 15);
+
+	EXPECT_EQ(A.head->next->next->data, 3);
+	EXPECT_EQ(A.head->next->next->xyz, 25);
+
+}
+
+
+
+
+
+TEST(FUNCTIONS, degree_in_range_0_99)
+{
+	polinom A;
+	polinom B;
+
+	A.push(1, 85);
+	B.push(3, 15);
+
+	EXPECT_ANY_THROW(A=A*B;);
+
+	A.clear();
+	B.clear();
+
+	A.push(1, 8);
+	B.push(3, 5);
+
+	EXPECT_NO_THROW(A = A * B;);
+
+
+	B.clear();
+
+	B.push(1, 99);
+	EXPECT_ANY_THROW(A = A * B;);
+}

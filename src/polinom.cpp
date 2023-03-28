@@ -17,23 +17,23 @@ void polinom::push(double data, int xyz)
 		flg = 0;
 		flg2 = 0;
 	}
-	else for (auto it = head; it != nullptr && flg2; it = it->next)
+	else for (auto m_it = head; m_it != nullptr && flg2; m_it = m_it->next)
 	{
-		if (it->xyz == xyz)
+		if (m_it->xyz == xyz)
 		{
-			push_add(data, it);
+			push_add(data, m_it);
 			flg = 0;
 			flg2 = 0;
 		}
-		else if (it->next != nullptr && it->next->xyz > xyz)
+		else if (m_it->next != nullptr && m_it->next->xyz > xyz)
 		{
-			push_between(data, xyz, it, it->next);
+			push_between(data, xyz, m_it, m_it->next);
 			flg = 0;
 			flg2 = 0;
 		}
-		else if (flg && it->next == nullptr)
+		else if (flg && m_it->next == nullptr)
 		{
-			push_end(data, xyz, it);
+			push_end(data, xyz, m_it);
 			flg = 0;
 			flg2 = 0;
 		}
@@ -71,43 +71,43 @@ polinom polinom::operator+(const polinom& second)
 {
 	polinom p_tmp;
 	/*
-	for (auto it = this->head; it != nullptr; it = it->next)
+	for (auto m_it = this->head; m_it != nullptr; m_it = m_it->next)
 	{
 		p_tmp.push(this->head->data, this->head->xyz);
 	}
-	for (auto it2 = second.head; it2 != nullptr; it2 = it2->next)
+	for (auto m_it_2 = second.head; m_it_2 != nullptr; m_it_2 = m_it_2->next)
 	{
 		p_tmp.push(second.head->data, second.head->xyz);
 	}
 	*/
-	auto it1 = head, it2 = second.head;
-	while (it1 != nullptr || it2 != nullptr)
+	auto m_it_1 = head, m_it_2 = second.head;
+	while (m_it_1 != nullptr || m_it_2 != nullptr)
 	{
-		if (it1 == nullptr)
+		if (m_it_1 == nullptr)
 		{
-			p_tmp.push(it2->data, it2->xyz);
-			it2 = it2->next;
+			p_tmp.push(m_it_2->data, m_it_2->xyz);
+			m_it_2 = m_it_2->next;
 		}
-		else if (it2 == nullptr)
+		else if (m_it_2 == nullptr)
 		{
-			p_tmp.push(it1->data, it1->xyz);
-			it1 = it1->next;
+			p_tmp.push(m_it_1->data, m_it_1->xyz);
+			m_it_1 = m_it_1->next;
 		}
-		else if (it1->xyz == it2->xyz)
+		else if (m_it_1->xyz == m_it_2->xyz)
 		{
-			p_tmp.push(it1->data+it2->data, it1->xyz);
-			it1 = it1->next;
-			it2 = it2->next;
+			p_tmp.push(m_it_1->data+m_it_2->data, m_it_1->xyz);
+			m_it_1 = m_it_1->next;
+			m_it_2 = m_it_2->next;
 		}
-		else if (it1->xyz > it2->xyz)
+		else if (m_it_1->xyz > m_it_2->xyz)
 		{
-			p_tmp.push(it2->data, it2->xyz);
-			it2 = it2->next;
+			p_tmp.push(m_it_2->data, m_it_2->xyz);
+			m_it_2 = m_it_2->next;
 		}
-		else if (it2->xyz > it1->xyz)
+		else if (m_it_2->xyz > m_it_1->xyz)
 		{
-			p_tmp.push(it1->data, it1->xyz);
-			it1 = it1->next;
+			p_tmp.push(m_it_1->data, m_it_1->xyz);
+			m_it_1 = m_it_1->next;
 		}
 	}
 	return p_tmp;
@@ -123,23 +123,23 @@ polinom polinom::operator-( polinom second)
 polinom polinom::operator*(const polinom& second)
 {
 	polinom p_tmp;
-	for (auto it = this->head; it != nullptr; it = it->next)
+	for (auto m_it = this->head; m_it != nullptr; m_it = m_it->next)
 	{
-		for (auto it2 = second.head; it2 != nullptr; it2 = it2->next)
+		for (auto m_it_2 = second.head; m_it_2 != nullptr; m_it_2 = m_it_2->next)
 		{
-			p_tmp.push((it->data) * (it2->data), (it->xyz) + (it2->xyz));
-			if ( ((it->xyz) % 100 + (it2->xyz) % 100) >= 100)
-				throw exception("При умножении полиномов степень z в каком-то мономе стала больше 99");
+			p_tmp.push((m_it->data) * (m_it_2->data), (m_it->xyz) + (m_it_2->xyz));
 
-			if((((it->xyz) - (it->xyz) % 10000) + ((it2->xyz) - (it2->xyz) % 10000)) / 10000 >= 100)
-				throw exception("При умножении полиномов степень x в каком-то мономе стала больше 99");
+			if ((m_it->data) * (m_it_2->data) != 0)
+			{
+				if (((m_it->xyz) % 100 + (m_it_2->xyz) % 100) >= 100)
+					throw exception("При умножении полиномов степень z в каком-то мономе стала больше 99");
 
-			if((((it->xyz) % 10000 - (it->xyz) % 100) + ((it2->xyz) % 10000 - (it2->xyz) % 100)) / 100 >= 100)
-				throw exception("При умножении полиномов степень y в каком-то мономе стала больше 99");
+				if ((((m_it->xyz) - (m_it->xyz) % 10000) + ((m_it_2->xyz) - (m_it_2->xyz) % 10000)) / 10000 >= 100)
+					throw exception("При умножении полиномов степень x в каком-то мономе стала больше 99");
 
-
-
-
+				if ((((m_it->xyz) % 10000 - (m_it->xyz) % 100) + ((m_it_2->xyz) % 10000 - (m_it_2->xyz) % 100)) / 100 >= 100)
+					throw exception("При умножении полиномов степень y в каком-то мономе стала больше 99");
+			}
 		}
 	}
 	return p_tmp;
@@ -148,9 +148,34 @@ polinom polinom::operator*(const polinom& second)
 polinom polinom::operator*(const double& var)
 {
 	polinom tmp;
-	for (auto it = this->head; it != nullptr; it = it->next)
+	for (auto m_it = this->head; m_it != nullptr; m_it = m_it->next)
 	{
-		tmp.push(it->data * var, it->xyz);
+		tmp.push(m_it->data * var, m_it->xyz);
 	}
 	return tmp;
+}
+
+
+
+
+
+
+
+
+
+
+
+void polinom::clear()
+{
+	if (head != nullptr)
+	{
+		auto it1 = head;
+		for (auto it = head->next; it != nullptr; it = it->next)
+		{
+			delete[]it1;
+			it1 = it;
+		}
+		delete[]it1;
+	}
+	head = nullptr;
 }

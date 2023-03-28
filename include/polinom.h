@@ -12,7 +12,7 @@ public:
 	void push_end(double data, int xyz, monom* last);
 	void push_add(double data, monom* itis);
 
-
+	void clear();
 
 	polinom operator+(const polinom& second);
 
