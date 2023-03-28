@@ -159,7 +159,10 @@ void calculate(polinom P)
 
 	for (auto m_it = P.head; m_it != nullptr; m_it = m_it->next)
 	{
-		resultat += m_it->data * pow(dbl1, ((m_it->xyz) - (m_it->xyz) % 10000) / 10000) * pow(dbl2, ((m_it->xyz) % 10000 - (m_it->xyz) % 100) / 100) * pow(dbl3, (m_it->xyz) % 100);
+		if (m_it->data != 0)
+		{
+			resultat += m_it->data * pow(dbl1, ((m_it->xyz) - (m_it->xyz) % 10000) / 10000) * pow(dbl2, ((m_it->xyz) % 10000 - (m_it->xyz) % 100) / 100) * pow(dbl3, (m_it->xyz) % 100);
+		}
 	}
 
 

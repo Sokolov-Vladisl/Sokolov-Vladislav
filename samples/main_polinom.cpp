@@ -14,7 +14,7 @@ int main()
 		int n = amount_of_monoms();
 
 		polinom A = create_polinom(n);
-
+		polinom B;
 
 		cout << endl << endl << endl << endl;
 		system("pause");
@@ -53,7 +53,7 @@ int main()
 				cout << "¬ведите количество мономов во втором полиноме:  ";
 				int n2 = amount_of_monoms();
 
-				polinom B = create_polinom(n2);
+				B = create_polinom(n2);
 
 				cout << endl << endl << endl << endl;
 				system("pause");
@@ -72,6 +72,9 @@ int main()
 				cout << endl << endl << endl << endl;
 				system("pause");
 				cout << endl;
+
+				B.clear();
+
 			}
 
 			if (choice == 2)
@@ -81,7 +84,7 @@ int main()
 				cout << "¬ведите количество мономов во втором полиноме:  ";
 				int n2 = amount_of_monoms();
 
-				polinom B = create_polinom(n2);
+				B = create_polinom(n2);
 
 				cout << endl << endl << endl << endl;
 				system("pause");
@@ -100,6 +103,8 @@ int main()
 				cout << endl << endl << endl << endl;
 				system("pause");
 				cout << endl;
+
+				B.clear();
 			}
 
 			if (choice == 3)
@@ -109,7 +114,7 @@ int main()
 				cout << "¬ведите количество мономов во втором полиноме:  ";
 				int n2 = amount_of_monoms();
 
-				polinom B = create_polinom(n2);
+				B = create_polinom(n2);
 
 				cout << endl << endl << endl << endl;
 				system("pause");
@@ -128,6 +133,9 @@ int main()
 				cout << endl << endl << endl << endl;
 				system("pause");
 				cout << endl;
+
+
+				B.clear();
 			}
 
 			if (choice == 4)
@@ -151,10 +159,14 @@ int main()
 				calculate(A);
 			}
 
+			
+
 		}
 
+		A.clear();
 
-
+		delete[] A.head;
+		delete[] B.head;
 
 
 	}
