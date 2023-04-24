@@ -96,7 +96,7 @@ int main()
 
 				cout << endl << endl << "Результат разности двух полиномов:" << endl;
 
-				A = A + B;
+				A = A - B;
 
 				show_polinom(A);
 
@@ -140,7 +140,7 @@ int main()
 
 			if (choice == 4)
 			{
-				int number = 0;
+				double number = 0;
 				cout << endl << endl << "Введите число на которое умножается полином: ";
 				cin >> number;
 				cout << endl << endl << "Результат умножения числа на полином :" << endl;
